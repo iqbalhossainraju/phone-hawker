@@ -1,7 +1,9 @@
 const searchItem = () => {
     const searchItem = document.getElementById('search-field');
+    const itemDetails = document.getElementById('item-details');
     const searchText = searchItem.value;
     searchItem.value = '';
+    itemDetails.textContent = '';
     if(searchText == ''){
         swal("Input is Empty!", "please write what you want?", "warning");
     }
@@ -37,7 +39,6 @@ const displayedSearchItem = (phones) => {
             <button onclick = "productsDetails('${phone.slug}')" class="btn btn-success">
             Details
             </button>
-
           </div>
             `;
             searchResult.appendChild(div);
@@ -46,23 +47,23 @@ const displayedSearchItem = (phones) => {
 }
 
 const productsDetails = (id) => {
-    const url =  `https://openapi.programming-hero.com/api/phones?slug=${id}`
-    fetch(url)
-    .then(response => response.json())
-    .then(data => productsDetailsDisplayed(data.data[0]))
+    const url =  `https://openapi.programming-hero.com/api/phone/${id}`
+    fetch(url).then(res => res.json())
+    .then(data => productsDetailsDisplayed(data.data))
 }
 
 const productsDetailsDisplayed = (details) => {
     // console.log(detail)
     const itemDetails = document.getElementById('item-details');
+    itemDetails.innerHTML = "";
     const div = document.createElement('div');
     div.classList.add('card');
     div.innerHTML= `
     <img class = "w-50 m-auto py-2" text-center" src="${details.image}" class="card-img-top" alt="..." />
     <div class="card-body">
-      <h5 class="card-title">Sensor: ${details.sensors}</h5>
-      </p>
-    </div>
+      <h5 class="card-title">Name: ${details.name}</h5>
+      <h6 class="card-title">Release Date: ${details.releaseDate}</h6>
+      <p>sensor: ${details.mainFeatures.sensors[0]},<br> ${details.mainFeatures.sensors[1]}, ${details.mainFeatures.sensors[2]}</p>
     `;
     itemDetails.appendChild(div)
 }
