@@ -74,7 +74,7 @@ const productsDetails = (id) => {
 const productsDetailsDisplayed = (details) => {
     // console.log(detail)
     const itemDetails = document.getElementById('item-details');
-    itemDetails.innerHTML = "";
+    itemDetails.textContent = "";
     const div = document.createElement('div');
     div.classList.add('card');
     div.innerHTML= `
@@ -82,27 +82,33 @@ const productsDetailsDisplayed = (details) => {
     <div class="card-body">
       <h5 class="card-title">Name: ${details.name}</h5>
       <h6 class="card-title">Release Date: ${details.releaseDate}</h6>
-      <p>
+      <div>
       Sensor:
-            ${details.mainFeatures.sensors[0]},<br>
-            ${details.mainFeatures.sensors[1]},<br>
-            ${details.mainFeatures.sensors[2]},<br>
-            ${details.mainFeatures.sensors[3]},<br>
-            ${details.mainFeatures.sensors[4]},<br>
-            ${details.mainFeatures.sensors[5]},<br>
-        </p>
-      <p>
-      ${details.others ? 'Others: = ' : ''}
-            ${details?.others?.Bluetooth ? details?.others?.Bluetooth :  ""}<br>
-            ${details?.others?.GPS ? details?.others?.GPS : ""}<br>
-            ${details?.others?.Bluetooth ? details?.others?.Bluetooth : ""}<br>
-            ${details?.others?.NFC ? details?.others?.NFC : ""}<br>
-            ${details?.others?.Radio ? details?.others?.Radio : ""}<br>
-            ${details?.others?.USB ? details?.others?.USB : ''}<br>
-            ${details?.others?.WLAN ? details?.others?.WLAN :  ""}
-        </p>
+            <p>Face ID: ${details.mainFeatures.sensors[0]}</p><br>
+           <p> Accelerometer: ${details.mainFeatures.sensors[1]}</p><br>
+           <p>Gyro: ${details.mainFeatures.sensors[2]}</p><br>
+           <p>Proximity: ${details.mainFeatures.sensors[3]}</p><br>
+           <p>Compass: ${details.mainFeatures.sensors[4]}</p><br>
+           <p>Barometer: ${details.mainFeatures.sensors[5]}</p><br>
+            <p>ChipSet: ${details.mainFeatures.chipSet}</p><br>        
+            <p>Display Size: ${details.mainFeatures.displaySize}</p><br>        
+            <p>Storage: ${details.mainFeatures.memory}</p>
+        </div>
+      <div>
+      ${details.others ? 'Others: ' : ''}
+            <p>Buletooth: ${details?.others?.Bluetooth ? details?.others?.Bluetooth :  ""}</p><br>
+            <p>GPS: ${details?.others?.GPS ? details?.others?.GPS : ""}</p><br>
+
+            <p>NFC: ${details?.others?.NFC ? details?.others?.NFC : ""}</p><br>
+
+            <p>Radio: ${details?.others?.Radio ? details?.others?.Radio : ""}</p><br>
+
+            <p>USB: ${details?.others?.USB ? details?.others?.USB : ''}</p><br>
+
+            <p>WLAN: ${details?.others?.WLAN ? details?.others?.WLAN :  ""}</p>
+        </div>
     `;
-    itemDetails.appendChild(div)
+    itemDetails.appendChild(div);
 }
 
 const viewAll = () => {
